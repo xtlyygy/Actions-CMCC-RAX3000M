@@ -73,13 +73,25 @@ git -C package/ddns-go checkout 6cd886e2942e768762c2a1021ab470e277cb4fef
 rm -rf package/lucky
 git clone --depth=1 https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 
-# Add only OpenAppFilter LuCI interface.
-# Kernel module and appfilter service are provided by ImmortalWrt packages feed.
-rm -rf /tmp/OpenAppFilter package/OpenAppFilter
-git clone https://github.com/destan19/OpenAppFilter.git /tmp/OpenAppFilter
-git -C /tmp/OpenAppFilter checkout 569f93bfd56afc3ae8c21f13fc973926ff6629a5
-mkdir -p package/OpenAppFilter
-cp -a /tmp/OpenAppFilter/luci-app-oaf package/OpenAppFilter/
+# Add LuCI Time Control (FW4/nftables; pin to a known upstream commit).
+rm -rf /tmp/luci-app-timecontrol package/luci-app-timecontrol
+git clone --depth=1 --branch js https://github.com/gaobin89/luci-app-timecontrol.git /tmp/luci-app-timecontrol
+git -C /tmp/luci-app-timecontrol checkout 686cb8070863752b1b1e2bbb013be5e2e994060f
+cp -a /tmp/luci-app-timecontrol/luci-app-timecontrol package/
+
+# Keep the iStore feed available for building its packages, but do not emit
+# an ImmortalWrt runtime opkg URL for the custom "istore" feed: that index is
+# not hosted on the configured mirror and causes "wget returned 8".
+python3 - <<'PY'
+from pathlib import Path
+p = Path("include/feeds.mk")
+s = p.read_text()
+old = "$(foreach feed,$(FEEDS_AVAILABLE),"
+new = "$(foreach feed,$(filter-out istore,$(FEEDS_AVAILABLE)),"
+if old not in s:
+    raise SystemExit("Could not find the OPKG feed-generation expression in include/feeds.mk")
+p.write_text(s.replace(old, new, 1))
+PY
 
 # Set Docker data directory on eMMC
 sed -i "s|option data_root '/opt/docker/'|option data_root '/mnt/mmcblk0p7/docker'|" feeds/packages/utils/dockerd/files/etc/config/dockerd
