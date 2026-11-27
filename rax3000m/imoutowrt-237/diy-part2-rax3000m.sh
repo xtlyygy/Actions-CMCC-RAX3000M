@@ -71,3 +71,7 @@ rm -rf package/OpenAppFilter
 git clone --depth=1 --branch v6.1.7 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 # Set Docker data directory on eMMC
 sed -i "s|option data_root '/opt/docker/'|option data_root '/mnt/mmcblk0p7/docker'|" feeds/packages/utils/dockerd/files/etc/config/dockerd
+# Refuse to start Docker unless the eMMC data partition is mounted
+sed -i "/^start_service() {/a\\
+    grep -qs ' /mnt/mmcblk0p7 ' /proc/mounts || { logger -t dockerd-init 'eMMC data partition is not mounted; refusing to start Docker'; return 1; }
+" feeds/packages/utils/dockerd/files/dockerd.init
