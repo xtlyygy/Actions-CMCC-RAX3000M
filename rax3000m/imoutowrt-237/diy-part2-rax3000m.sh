@@ -60,3 +60,6 @@ rm -rf /tmp/luci-app-adguardhome
 git clone --depth=1 https://github.com/MinimaxFlora/luci-app-adguardhome.git /tmp/luci-app-adguardhome
 
 cp -a /tmp/luci-app-adguardhome/luci-app-adguardhome package/
+# Add DDNS-GO and its LuCI interface
+rm -rf package/ddns-go
+git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
