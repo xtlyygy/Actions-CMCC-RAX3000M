@@ -46,3 +46,11 @@ git clone https://github.com/vernesong/OpenClash.git --depth=1 feeds/luci/applic
 sed -i "s/0.openwrt.pool.ntp.org/ntp.aliyun.com/g" package/base-files/files/bin/config_generate
 sed -i "s/1.openwrt.pool.ntp.org/cn.ntp.org.cn/g" package/base-files/files/bin/config_generate
 sed -i "s/2.openwrt.pool.ntp.org/cn.pool.ntp.org/g" package/base-files/files/bin/config_generate
+# Add Docker LuCI manager and library
+rm -rf /tmp/luci-app-dockerman /tmp/luci-lib-docker
+
+git clone --depth=1 https://github.com/lisaac/luci-app-dockerman.git /tmp/luci-app-dockerman
+cp -a /tmp/luci-app-dockerman/applications/luci-app-dockerman package/
+
+git clone --depth=1 https://github.com/lisaac/luci-lib-docker.git /tmp/luci-lib-docker
+cp -a /tmp/luci-lib-docker/collections/luci-lib-docker package/
