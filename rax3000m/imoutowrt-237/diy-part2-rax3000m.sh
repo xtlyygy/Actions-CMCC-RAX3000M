@@ -66,3 +66,6 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git package/ddn
 # Add Lucky and its LuCI interface
 rm -rf package/lucky
 git clone --depth=1 https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+# Add OpenAppFilter v6.1.7
+rm -rf package/OpenAppFilter
+git clone --depth=1 --branch v6.1.7 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
