@@ -54,3 +54,9 @@ cp -a /tmp/luci-app-dockerman/applications/luci-app-dockerman package/
 
 git clone --depth=1 https://github.com/lisaac/luci-lib-docker.git /tmp/luci-lib-docker
 cp -a /tmp/luci-lib-docker/collections/luci-lib-docker package/
+# Add AdGuardHome LuCI with DNS redirect support
+rm -rf /tmp/luci-app-adguardhome
+
+git clone --depth=1 https://github.com/MinimaxFlora/luci-app-adguardhome.git /tmp/luci-app-adguardhome
+
+cp -a /tmp/luci-app-adguardhome/luci-app-adguardhome package/
