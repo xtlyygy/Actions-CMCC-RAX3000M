@@ -10,18 +10,15 @@
 
 ## 特性
 
-* OpenClash or nikki
-* 网络唤醒
-* DDNS
-* Samba4
-* hd_idle
+Docker、WireGuard、OpenVPN、AdGuardHome、OpenClash、DDNS-GO、Lucky、iStore、Argon、UPnP
+
 * 更多功能自行刷入查看(可能会不定期变动)...
 
 ## 后台进入方式和密码
 
    | 项目 | 值 |
    | :--- | :--- |
-   | 默认后台地址 | `192.168.2.1` |
+   | 默认后台地址 | `192.168.10.1` |
    | 默认后台密码 | `无密码` |
 
 ## 其它教程（大多数教程均来自互联网，此处作备份用） <a id="tutorial"></a>
