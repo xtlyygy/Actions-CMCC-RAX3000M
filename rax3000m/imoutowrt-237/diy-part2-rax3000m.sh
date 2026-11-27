@@ -72,9 +72,15 @@ git -C package/ddns-go checkout 6cd886e2942e768762c2a1021ab470e277cb4fef
 # Add Lucky and its LuCI interface
 rm -rf package/lucky
 git clone --depth=1 https://github.com/sirpdboy/luci-app-lucky.git package/lucky
-# Add OpenAppFilter v6.1.7
-rm -rf package/OpenAppFilter
-git clone --depth=1 --branch v6.1.7 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+
+# Add only OpenAppFilter LuCI interface.
+# Kernel module and appfilter service are provided by ImmortalWrt packages feed.
+rm -rf /tmp/OpenAppFilter package/OpenAppFilter
+git clone https://github.com/destan19/OpenAppFilter.git /tmp/OpenAppFilter
+git -C /tmp/OpenAppFilter checkout 569f93bfd56afc3ae8c21f13fc973926ff6629a5
+mkdir -p package/OpenAppFilter
+cp -a /tmp/OpenAppFilter/luci-app-oaf package/OpenAppFilter/
+
 # Set Docker data directory on eMMC
 sed -i "s|option data_root '/opt/docker/'|option data_root '/mnt/mmcblk0p7/docker'|" feeds/packages/utils/dockerd/files/etc/config/dockerd
 # Refuse to start Docker unless the eMMC data partition is mounted
