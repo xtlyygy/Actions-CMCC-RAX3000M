@@ -29,6 +29,10 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package
 # git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git package/luci-theme-atmaterial
 # git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 
+# Add Argon theme (configuration is integrated)
+rm -rf package/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
+
 # 添加额外软件包
 # git clone https://github.com/sirpdboy/luci-app-netdata.git package/luci-app-netdata
 # git clone https://github.com/xiaoxiao29/luci-app-adguardhome.git package/luci-app-adguardhome
