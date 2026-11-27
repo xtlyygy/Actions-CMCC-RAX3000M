@@ -75,8 +75,10 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 
 # Add LuCI Time Control (FW4/nftables; pin to a known upstream commit).
 rm -rf /tmp/luci-app-timecontrol package/luci-app-timecontrol
-git clone --depth=1 --branch js https://github.com/gaobin89/luci-app-timecontrol.git /tmp/luci-app-timecontrol
-git -C /tmp/luci-app-timecontrol checkout 686cb8070863752b1b1e2bbb013be5e2e994060f
+git init /tmp/luci-app-timecontrol
+git -C /tmp/luci-app-timecontrol remote add origin https://github.com/gaobin89/luci-app-timecontrol.git
+git -C /tmp/luci-app-timecontrol fetch --depth=1 origin 686cb8070863752b1b1e2bbb013be5e2e994060f
+git -C /tmp/luci-app-timecontrol checkout --detach FETCH_HEAD
 cp -a /tmp/luci-app-timecontrol/luci-app-timecontrol package/
 
 # Keep the iStore feed available for building its packages, but do not emit
