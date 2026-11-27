@@ -11,10 +11,10 @@
 #
 
 # Add backup file and 
-echo '/etc/nikki/run/geoip.metadb' >> package/base-files/files/etc/sysupgrade.conf
+
 
 # Modify default IP and password
-sed -i 's/192.168.6.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.6.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 
 # 修改连接数
 # sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535/g' package/kernel/linux/files/sysctl-nf-conntrack.conf
