@@ -69,3 +69,5 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 # Add OpenAppFilter v6.1.7
 rm -rf package/OpenAppFilter
 git clone --depth=1 --branch v6.1.7 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+# Set Docker data directory on eMMC
+sed -i "s|option data_root '/opt/docker/'|option data_root '/mnt/mmcblk0p7/docker'|" feeds/packages/utils/dockerd/files/etc/config/dockerd
