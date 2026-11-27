@@ -67,7 +67,7 @@ git clone --depth=1 https://github.com/MinimaxFlora/luci-app-adguardhome.git /tm
 cp -a /tmp/luci-app-adguardhome/luci-app-adguardhome package/
 # Add DDNS-GO and its LuCI interface
 rm -rf package/ddns-go
-git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
+git clone https://github.com/sirpdboy/luci-app-ddns-go.git package/ddns-go
 git -C package/ddns-go checkout 6cd886e2942e768762c2a1021ab470e277cb4fef
 # Add Lucky and its LuCI interface
 rm -rf package/lucky
